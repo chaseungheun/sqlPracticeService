@@ -3,8 +3,7 @@
 <html> 
 	<head> 
 	<body> 
-				<h1>저는 <%= request.getParameter("id") %> 입니다.</h1>
-		<form action="<c:url value="/sample/login"/>" method="post"> 
+		<form action="<c:url value="/sample/login.do"/>" method="post"> 
 		<input type="text" name="id"><br/> 
 		<input type="password" name="pw"><br/> 
 		<input type="submit" value="Send"> 

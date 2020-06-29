@@ -3,7 +3,7 @@
 <html> 
 	<head> 
 	<body> 
-
+		<h1>내 정보</h1>
 		<input type="button" value="뒤로가기" onclick="history.back(-1);">
 
 	</body>

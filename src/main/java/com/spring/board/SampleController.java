@@ -33,8 +33,15 @@ public class SampleController {
     public String getLogin(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	System.out.println(request.getParameter("id")+" "+request.getParameter("pw"));
     	
-    	return "info";
+    	return "login";
     }
+    @RequestMapping(value = "/login.do")
+    public String doLogin(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	System.out.println(request.getParameter("id")+" "+request.getParameter("pw"));
+    	
+    	return "home";
+    }
+    
     @RequestMapping(value = "/join")
     public String getJoin(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	return "joinForm";
@@ -43,6 +50,18 @@ public class SampleController {
     @RequestMapping(value = "/join.do")
     public String doJoin(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	//db에 회원정보
+    	return "home";
+    }
+    @RequestMapping(value = "/mypage")
+    public String getMypage(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	return "mypage";
+    }
+    @RequestMapping(value = "/problem")
+    public String getProblem(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	return "problem";
+    }
+    @RequestMapping(value = "/problem.do")
+    public String doProblem(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	return "home";
     }
     
