@@ -50,6 +50,15 @@ public class SampleController {
     @RequestMapping(value = "/join.do")
     public String doJoin(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	//db에 회원정보
+    	MemberDto md = new MemberDto();
+    	md.setId(request.getParameter("id"));
+    	md.setPw(request.getParameter("password"));
+    	md.setName(request.getParameter("name"));
+    	md.setEmail(request.getParameter("email_1")+request.getParameter("email_2"));
+    	md.setPhone(request.getParameter("phone"));
+    	MemberDAO ma = MemberDAO.getInstance();
+    	ma.insert(md);
+    	
     	return "home";
     }
     @RequestMapping(value = "/mypage")
@@ -62,9 +71,17 @@ public class SampleController {
     }
     @RequestMapping(value = "/problem.do")
     public String doProblem(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	return "problemResult";
+    }
+    @RequestMapping(value = "/home")
+    public String getHome(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	System.out.println(5);
     	return "home";
     }
-    
+    @RequestMapping(value = "/rank")
+    public String getRank(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	return "rankPage";
+    }
     
     
 }

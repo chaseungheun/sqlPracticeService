@@ -13,7 +13,7 @@
 			<hr />
 			 
 			<nav>
-			  홈 - 글 작성
+			  문제
 			</nav>
 			<hr />
 			
@@ -55,6 +55,9 @@
 		</form>
 		<form action="<c:url value="/sample/mypage"/>" method="post"> 
 			<input type="submit" value="마이페이지"> 
+		</form>
+		<form action="<c:url value="/sample/rank"/>" method="post"> 
+			<input type="submit" value="순위보기"> 
 		</form>
 		
 		
