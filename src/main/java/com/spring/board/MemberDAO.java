@@ -2,7 +2,10 @@ package com.spring.board;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.spring.board.MemberDto;
 
 public class MemberDAO {
 	// 싱글톤
@@ -31,6 +34,7 @@ public class MemberDAO {
 			ppst.setString(4, data.getEmail());
 			ppst.setString(5, data.getPhone());
 			ppst.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -42,5 +46,49 @@ public class MemberDAO {
 			}
 		}
 	}
+	public static MemberDto memberSearch(MemberDto data) {
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		Connection conn = null;
+		PreparedStatement ppst = null;
+	   	System.out.println("log2");
+		try {
+			// JDBC Driver 로딩
+			Class.forName(driver);
+			// Connection 객체 생성 / DB 연결(접속)
+		   	System.out.println("log30");
+			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
+			// 수행할 쿼리 정의 / no 컬럼의 데이터는 시퀀스로 입력하고, reg_date는 오라클의 sysdate로 입력
+			ppst = conn.prepareStatement("select * from member where M_ID=?");
+			// 매개변수로 전달된 데이터를 쿼리문의 물음표에 값 매핑
+		   	System.out.println("log31");
+			ppst.setString(1, data.getId());
+		   	System.out.println("log32");
+			ResultSet rs = ppst.executeQuery();
+		   	System.out.println("log33");
+			MemberDto md= new MemberDto();
+			rs.next();
+			md.setId(rs.getString("M_ID"));
+			md.setPw(rs.getString("M_PW"));
+			md.setName(rs.getString("M_NAME"));
+			md.setEmail(rs.getString("M_EMAIL"));
+			md.setPhone(rs.getString("M_PHONE"));
+		   	System.out.println("log3");
+			return md;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ppst != null) ppst.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				e2.getStackTrace();
+			}
+		}
+	   	System.out.println("log4");
+		return null;
+	}
 
+	
 }

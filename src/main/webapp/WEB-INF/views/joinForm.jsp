@@ -1,88 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>È¸¿ø°¡ÀÔ È­¸é</title>
-    
-    <style>
-        #wrap{
-            width:530px;
-            margin-left:auto; 
-            margin-right:auto;
-            text-align:center;
-        }
-        
-        table{
-            border:3px solid skyblue
-        }
-        
-        td{
-            border:1px solid skyblue
-        }
-        
-        #title{
-            background-color:skyblue
-        }
-    </style>
+<title>íšŒì›ê°€ì… í™”ë©´</title>
+
+<style>
+#wrap {
+	width: 530px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+table {
+	border: 3px solid skyblue
+}
+
+td {
+	border: 1px solid skyblue
+}
+
+#title {
+	background-color: skyblue
+}
+</style>
 </head>
 <body>
-    <!-- ¿ŞÂÊ, ¿À¸¥ÂÊ ¹Ù±ù¿©¹éÀ» auto·Î ÁÖ¸é Áß¾ÓÁ¤·ÄµÈ´Ù.  -->
-    
-    <div id="wrap">
-        <br><br>
-        <b><font size="6" color="gray">È¸¿ø°¡ÀÔ</font></b>
-        <br><br><br>
-        
-        <form action="join.do" method="post">
-            <table>
-                <tr>
-                    <td id="title">¾ÆÀÌµğ</td>
-                    <td>
-                        <input type="text" name="id" maxlength="20">
-                        <input type="button" value="Áßº¹È®ÀÎ" >    
-                    </td>
-                </tr>
-                        
-                <tr>
-                    <td id="title">ºñ¹Ğ¹øÈ£</td>
-                    <td>
-                        <input type="password" name="password" maxlength="15">
-                    </td>
-                </tr>
-                
+	<!-- ì™¼ìª½, ì˜¤ë¥¸ìª½ ë°”ê¹¥ì—¬ë°±ì„ autoë¡œ ì£¼ë©´ ì¤‘ì•™ì •ë ¬ëœë‹¤.  -->
 
-                <tr>
-                    <td id="title">ÀÌ¸§</td>
-                    <td>
-                        <input type="text" name="name" maxlength="40">
-                    </td>
-                </tr>
-                    
-                                       
-                <tr>
-                    <td id="title">ÀÌ¸ŞÀÏ</td>
-                    <td>
-                        <input type="text" name="email_1" maxlength="30">@
-                        <select name="email_2">
-                            <option>naver.com</option>
-                            <option>daum.net</option>
-                            <option>gmail.com</option>
-                            <option>nate.com</option>                        
-                        </select>
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td id="title">ÈŞ´ëÀüÈ­</td>
-                    <td>
-                        <input type="text" name="phone" />
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <input type="submit" value="°¡ÀÔ"/>  <input type="button" value="Ãë¼Ò">
-        </form>
-    </div>
+	<div id="wrap">
+		<br>
+		<br> <b><font size="6" color="gray">íšŒì›ê°€ì…</font></b> <br>
+		<br>
+		<br>
+
+		<form:form action="${cp}/sample/join.do" method="post" commandName="memberDto">
+			<table>
+				<tr>
+					<td>ì•„ì´ë””</td>
+					<td><form:input path="id" /></td>
+				</tr>
+				<tr>
+					<td>ë¹„ë°€ë²ˆí˜¸</td>
+					<td><form:input path="pw" /></td>
+				</tr>
+				<tr>
+					<td>ì´ë¦„</td>
+					<td><form:input path="name" /></td>
+				</tr>
+				<tr>
+					<td>ì´ë©”ì¼</td>
+					<td><form:input path="email" /></td>
+				</tr>
+				<tr>
+					<td>ì „í™”ë²ˆí˜¸</td>
+					<td><form:input path="phone" /></td>
+				</tr>
+				
+			</table>
+			<input type="submit" value="ê°€ì…" />
+		</form:form>
+	</div>
 </body>
 </html>
 

@@ -4,19 +4,29 @@
 
 <html> 
 	<head>
-
+			<style>
+			 	div{
+		 			width: 600px;
+		 			text-align: center;
+		 			line-height: 20px;
+		 			font-weight: bold;
+		 			margin-left:auto; 
+	            	margin-right:auto;
+		 		}
+	 		</style>
 	<body> 
-		<input id = "test" type="text" value = "채점시작" class="inputbox" size ="10"/>
-		<form action="home">
-			<input type="submit" value="HOME">
-		</form>
-		
-		<script type="text/javascript">	
-			setTimeout(function() {document.getElementById("test").value='0';}, 1000);
-			setTimeout(function() {document.getElementById("test").value='50';}, 2000);
-			setTimeout(function() {	document.getElementById("test").value='정답';}, 3000);
-		</script>
-		
+		<div>
+			<input id = "test" type="text" value = "채점시작" class="inputbox" size ="10" style="width:100;height:40;text-align:center;"/>
+			<form action="home">
+				<input type="submit" value="HOME" style="width:100;height:40;text-align=center;">
+			</form>
+			
+			<script type="text/javascript">	
+				setTimeout(function() {document.getElementById("test").value='0';}, 1000);
+				setTimeout(function() {document.getElementById("test").value='50';}, 2000);
+				setTimeout(function() {	document.getElementById("test").value='정답';}, 3000);
+			</script>
+		</div>
 	</body>
 	
 </html>
