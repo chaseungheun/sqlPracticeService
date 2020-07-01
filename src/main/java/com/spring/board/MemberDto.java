@@ -6,6 +6,14 @@ public class MemberDto {
 	private String name;
 	private String email;
 	private String phone;
+	private String sql;
+	
+	public String getSql() {
+		return sql;
+	}
+	public void setSql(String sql) {
+		this.sql = sql;
+	}
 	public String getId() {
 		return id;
 	}

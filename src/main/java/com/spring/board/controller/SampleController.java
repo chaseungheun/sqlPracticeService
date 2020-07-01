@@ -106,7 +106,13 @@ public class SampleController {
     	return "problem";
     }
     @RequestMapping(value = "/problem.do")
-    public String doProblem(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    public String doProblem(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+		HttpSession session = request.getSession();
+		
+		MemberDto md = (MemberDto)session.getAttribute("member");	
+    	md.setSql(request.getParameter("sql"));
+		System.out.println(md.getId() +"," + md.getSql());
+		
     	return "problemResult";
     }
     @RequestMapping(value = "/home")

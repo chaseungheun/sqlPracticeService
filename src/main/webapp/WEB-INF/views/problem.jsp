@@ -21,7 +21,7 @@
 	        	테이블 STUDENT에서 모든 사람의 이름을 학번순으로으로 출력하세요.<br>
 	        	STUDENT테이블은 STU_NO 학번, STU_NAME 이름으로 구성되어있습니다.<br>
 	        	<br>
-	        	<input type = "text" size="60" style="height:40;">
+	        	<input type = "text" size="60" style="height:40;" name="sql">
 	        	<br>
 	        	<br>
 				<input type="submit" value="정답 제출하기" style="width:100;height:40;text-align=center;">
