@@ -19,6 +19,8 @@ import com.spring.board.MemberDAO;
 import com.spring.board.MemberDto;
 import com.spring.board.ProblemDAO;
 import com.spring.board.ProblemDto;
+import com.spring.board.SubmitLogDAO;
+import com.spring.board.SubmitLogDto;
  
 @Controller
 @RequestMapping(value = "/sample")
@@ -47,7 +49,8 @@ public class SampleController {
     }
     @RequestMapping(value = "/login.do")
     public String doLogin(MemberDto member,HttpServletRequest request) throws Exception {        
-    	MemberDto mem = MemberDAO.memberSearch(member);
+    	MemberDAO md = MemberDAO.getInstance();
+    	MemberDto mem = md.memberSearch(member);
     	System.out.println(mem.getPw() +"="+member.getPw());
     	if(mem.getPw().equals(member.getPw())) {
     		HttpSession session = request.getSession();
@@ -129,19 +132,27 @@ public class SampleController {
 		MemberDto md = (MemberDto)session.getAttribute("member");	
     	md.setSql(request.getParameter("sql"));
     	String pnum = request.getParameter("pnum");
-		System.out.println(md.getId() +"," + md.getSql()+pnum);
-		
+		//System.out.println(md.getId() +"," + md.getSql()+pnum);
 		ProblemDAO pd = ProblemDAO.getInstance();
 		ProblemDto pDto = pd.select_num(pnum);
 		System.out.println(pd.select_answer(md.getSql()));
 		System.out.println(pd.select_answer(pDto.getP_answer()));
 		
+		SubmitLogDto sDto = new SubmitLogDto();
+		sDto.setM_ID(md.getId());
+		sDto.setProb_num(pnum);
+		sDto.setSub_code(md.getSql());
+		sDto.setSub_answer("F");
+		if(pd.select_answer(md.getSql()).equals(pd.select_answer(pDto.getP_answer()))) {
+			sDto.setSub_answer("T");
+		}
+		SubmitLogDAO sd = SubmitLogDAO.getInstance();
+		sd.insert(sDto);
 		
     	return "problemResult";
     }
     @RequestMapping(value = "/home")
     public String getHome(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
-    	System.out.println(5);
     	return "redirect:/sample/";
     }
     @RequestMapping(value = "/rank")

@@ -13,7 +13,8 @@ import com.spring.board.MemberDto;
 public class ProblemDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-
+	Connection conn = null;
+	PreparedStatement ppst = null;
 	// 싱글톤
 	private static ProblemDAO instance = new ProblemDAO();
 
@@ -26,8 +27,7 @@ public class ProblemDAO {
 
 	// 데이터베이스 insert 로직
 	public void insert(ProblemDto data) {
-		Connection conn = null;
-		PreparedStatement ppst = null;
+
 		try {
 			// JDBC Driver 로딩
 			Class.forName(driver);
@@ -55,8 +55,6 @@ public class ProblemDAO {
 		}
 	}
 	public ProblemDto select_num(String p_no) {
-		Connection conn = null;
-		PreparedStatement ppst = null;
 		ProblemDto dto = new ProblemDto();				
 		try {
 			Class.forName(driver);
@@ -88,8 +86,6 @@ public class ProblemDAO {
 	public String select_answer(String sql) {
 		String ret="";
 		int colnum = 0;
-		Connection conn = null;
-		PreparedStatement ppst = null;
 		ProblemDto dto = new ProblemDto();				
 		try {
 			Class.forName(driver);
@@ -121,8 +117,6 @@ public class ProblemDAO {
 	}
 	public ArrayList<ProblemDto> select_all() {
 		ArrayList<ProblemDto> list = new ArrayList<ProblemDto>();
-		Connection conn = null;
-		PreparedStatement ppst = null;
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
