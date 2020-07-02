@@ -1,6 +1,7 @@
 package com.spring.board.controller;
  
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.board.MemberDAO;
 import com.spring.board.MemberDto;
+import com.spring.board.ProblemDAO;
+import com.spring.board.ProblemDto;
  
 @Controller
 @RequestMapping(value = "/sample")
@@ -26,18 +29,15 @@ public class SampleController {
 	}
 	
     @RequestMapping(value = "/")
-    public String getHome(HttpServletRequest request, HttpServletResponse reponse,Model model,Locale locale) throws Exception {        
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+    public String getHome(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+		ProblemDAO pd = ProblemDAO.getInstance();
+		ArrayList<ProblemDto> list = pd.select_all();
+    	
+		model.addAttribute("list",list);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).getP_title());
+		}
     	return "home";
-    }
-    @RequestMapping(value = "/getSample")
-    public String getSample(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
-    	return "submit";
     }
     
     @RequestMapping(value = "/login")
@@ -47,8 +47,6 @@ public class SampleController {
     }
     @RequestMapping(value = "/login.do")
     public String doLogin(MemberDto member,HttpServletRequest request) throws Exception {        
-    	
-    	System.out.println("log1");
     	MemberDto mem = MemberDAO.memberSearch(member);
     	System.out.println(mem.getPw() +"="+member.getPw());
     	if(mem.getPw().equals(member.getPw())) {
@@ -104,6 +102,19 @@ public class SampleController {
     @RequestMapping(value = "/problem")
     public String getProblem(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	return "problem";
+    }
+    @RequestMapping(value = "/problemCreate")
+    public String getProblemCreate(Model model, HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	model.addAttribute("problemDto",new ProblemDto());
+    	return "problemCreate";
+    }
+    @RequestMapping(value = "/problemCreate.do")
+    public String doProblemCreate(@ModelAttribute ProblemDto mem, HttpServletRequest request, HttpServletResponse response,Model model) throws Exception {        
+    	System.out.println(mem.getP_title() +"??");
+    	ProblemDAO pa = ProblemDAO.getInstance();
+    	pa.insert(mem);
+    	
+    	return getHome(model,request,response);
     }
     @RequestMapping(value = "/problem.do")
     public String doProblem(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {        

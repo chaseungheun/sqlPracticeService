@@ -7,6 +7,9 @@
 <title>게시판</title>
 <style>
 div {
+	border: 2px solid #000;
+	width: 500px;
+	height: 300px;
 	text-align: center;
 	line-height: 100px;
 	font-weight: bold;
@@ -71,32 +74,43 @@ th {
 		<header>
 			<h1>문제 게시판</h1>
 		</header>
-		<section id="container">
-			<form role="form" method="post" action="<c:url value="/sample/problem"/>">
-				<table>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>문제풀기</th>
-					</tr>
 
-					<c:forEach items="${list}" var="list">
-						<tr>
-							<td><c:out value="${list.getP_num()}" /></td>
-							<td><c:out value="${list.getP_title()}" /></td>
-							<td><c:out value="차차" /></td>
-							<td><input type="submit" value="풀기"/></td>
-						</tr>
-					</c:forEach>
+		<form method="post" action="<c:url value="/sample/problem"/>">
+			<table>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>문제풀기</th>
+				</tr>
 
-				</table>
-			</form>
-		</section>
+				<tr align="center">
+					<td><c:out value="1" /></td>
+					<td><c:out value="조회 문제" /></td>
+					<td><c:out value="차승훈" /></td>
+					<td><input type="submit" value="풀기"></td>
+				</tr>
+				<tr align="center">
+					<td><c:out value="2" /></td>
+					<td><c:out value="삽입 문제" /></td>
+					<td><c:out value="차승훈" /></td>
+					<td><input type="submit" value="풀기"></td>
+
+				</tr>
+				<tr align="center">
+					<td><c:out value="3" /></td>
+					<td><c:out value="변경 문제 " /></td>
+					<td><c:out value="차승훈" /></td>
+					<td><input type="submit" value="풀기"></td>
+
+				</tr>
+
+			</table>
+		</form>
 	</div>
-	<form action="<c:url value="/sample/problemCreate"/>" method="post">
-		<input type="submit" value="문제 만들기">
-	</form>
+			<form action="<c:url value="/sample/problemCreate"/>" method="post">
+				<input type="submit" value="문제 만들기">
+			</form>
 	<h1>MEMBER LOGIN OK</h1>
 
 	ID : ${member.getId()}
