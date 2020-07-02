@@ -34,9 +34,9 @@ public class SampleController {
 		ArrayList<ProblemDto> list = pd.select_all();
     	
 		model.addAttribute("list",list);
-		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i).getP_title());
-		}
+//		for(int i=0;i<list.size();i++) {
+//			System.out.println(i +"="+list.get(i).getP_title());
+//		}
     	return "home";
     }
     
@@ -53,7 +53,7 @@ public class SampleController {
     		HttpSession session = request.getSession();
     		session.setAttribute("member", mem);
     	}
-    	return "home";
+    	return "redirect:/sample/";
     }
     
     @RequestMapping(value = "/join")
@@ -67,7 +67,7 @@ public class SampleController {
     	MemberDAO ma = MemberDAO.getInstance();
     	ma.insert(mem);
     	
-    	return "home";
+    	return "redirect:/sample/";
     }
     //회원가입 넘어오면 처리
     /*
@@ -100,7 +100,13 @@ public class SampleController {
     	
     }
     @RequestMapping(value = "/problem")
-    public String getProblem(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    public String getProblem(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	String p_no = request.getParameter("p_no");
+    	System.out.println(p_no);
+    	ProblemDAO pd = ProblemDAO.getInstance();
+    	ProblemDto dto = pd.select_num(p_no);
+    	model.addAttribute("pro",dto);
+    	
     	return "problem";
     }
     @RequestMapping(value = "/problemCreate")
@@ -114,7 +120,7 @@ public class SampleController {
     	ProblemDAO pa = ProblemDAO.getInstance();
     	pa.insert(mem);
     	
-    	return getHome(model,request,response);
+    	return "redirect:/sample/";
     }
     @RequestMapping(value = "/problem.do")
     public String doProblem(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
@@ -122,23 +128,33 @@ public class SampleController {
 		
 		MemberDto md = (MemberDto)session.getAttribute("member");	
     	md.setSql(request.getParameter("sql"));
-		System.out.println(md.getId() +"," + md.getSql());
+    	String pnum = request.getParameter("pnum");
+		System.out.println(md.getId() +"," + md.getSql()+pnum);
+		
+		ProblemDAO pd = ProblemDAO.getInstance();
+		ProblemDto pDto = pd.select_num(pnum);
+		System.out.println(pd.select_answer(md.getSql()));
+		System.out.println(pd.select_answer(pDto.getP_answer()));
+		
 		
     	return "problemResult";
     }
     @RequestMapping(value = "/home")
     public String getHome(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
     	System.out.println(5);
-    	return "home";
+    	return "redirect:/sample/";
     }
     @RequestMapping(value = "/rank")
-    public String getRank(HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    public String getRank(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {        
+    	MemberDAO md = MemberDAO.getInstance();
+    	ArrayList<MemberDto> list_ranking = md.ranking();
+    	model.addAttribute("list_ranking",list_ranking);
     	return "rankPage";
     }
     @RequestMapping(value = "/logout.do")
     public String getLogout(HttpServletRequest request, HttpSession session) throws Exception {        
     	session.invalidate();
-    	return "home";
+    	return "redirect:/sample/";
     }
     
     

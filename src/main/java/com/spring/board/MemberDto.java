@@ -7,7 +7,14 @@ public class MemberDto {
 	private String email;
 	private String phone;
 	private String sql;
+	private String p_cnt;
 	
+	public String getP_cnt() {
+		return p_cnt;
+	}
+	public void setP_cnt(String p_cnt) {
+		this.p_cnt = p_cnt;
+	}
 	public String getSql() {
 		return sql;
 	}

@@ -66,13 +66,11 @@ th {
 		</tr>
 	</table>
 
-	<a href="${cp}/">MAIN</a>
 	<div id="root">
 		<header>
 			<h1>문제 게시판</h1>
 		</header>
 		<section id="container">
-			<form role="form" method="post" action="<c:url value="/sample/problem"/>">
 				<table>
 					<tr>
 						<th>번호</th>
@@ -83,22 +81,19 @@ th {
 
 					<c:forEach items="${list}" var="list">
 						<tr>
-							<td><c:out value="${list.getP_num()}" /></td>
+							<td><c:out value="${list.getP_num()}"/></td>
 							<td><c:out value="${list.getP_title()}" /></td>
 							<td><c:out value="차차" /></td>
-							<td><input type="submit" value="풀기"/></td>
+							<td><a href='<c:url value='/sample/problem?p_no=${list.getP_num()}'/>' class="text-dark">풀기</a></td>
 						</tr>
 					</c:forEach>
 
 				</table>
-			</form>
 		</section>
 	</div>
 	<form action="<c:url value="/sample/problemCreate"/>" method="post">
 		<input type="submit" value="문제 만들기">
 	</form>
-	<h1>MEMBER LOGIN OK</h1>
-
 	ID : ${member.getId()}
 	<br /> PW : ${member.getPw()}
 	<br />

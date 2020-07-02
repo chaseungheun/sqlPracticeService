@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,11 @@
 <body>
 	<table>
 	<tr> <th>순위</th> <th>ID</th> <th>맞은 문제</th> </tr>
-	<%for(int i=0;i<15;i++){ %>
-		<tr> <td><%=i+1%>위 </td> <td> 랭커<%=i+1%></td><td><%=100-i %>개</td><tr>
-	<%} %>
+			<%int i=0; %>
+			<c:forEach items="${list_ranking}" var="list">
+				<tr> <td><%=i+1%>위 </td> <td> ${list.getId()}</td><td>${list.getP_cnt()}문제</td><tr>
+				<%i=i+1; %>
+			</c:forEach>
 	</table>
 	<div>
 		<a href="/board">< </a><a href="/board">1 </a><a href="/board">2 </a><a href="/board">3 </a><a href="/board">4 </a><a href="/">5 </a><a href="/">></a>

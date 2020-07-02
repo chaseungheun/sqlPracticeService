@@ -16,12 +16,13 @@
 	</head>
 	<body> 
 		<div>
-			<h1>2번 문제</h1>
+			<h1>${pro.getP_num()}번 문제</h1>
 	        <form action="problem.do" method="post">
-	        	테이블 STUDENT에서 모든 사람의 이름을 학번순으로으로 출력하세요.<br>
-	        	STUDENT테이블은 STU_NO 학번, STU_NAME 이름으로 구성되어있습니다.<br>
+					<c:out value="${pro.getP_body()}" />
 	        	<br>
 	        	<input type = "text" size="60" style="height:40;" name="sql">
+				<input type = "hidden" value=${pro.getP_num()} name="pnum"> 
+
 	        	<br>
 	        	<br>
 				<input type="submit" value="정답 제출하기" style="width:100;height:40;text-align=center;">
