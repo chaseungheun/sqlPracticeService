@@ -115,6 +115,14 @@ public class ProblemDAO {
 		}
 		return ret;
 	}
+	public String create_answer(String sql) {
+		String ret="";
+		return ret;
+	}
+	public String modify_answer(String sql) {
+		String ret="";
+		return ret;
+	}
 	public ArrayList<ProblemDto> select_all() {
 		ArrayList<ProblemDto> list = new ArrayList<ProblemDto>();
 		try {

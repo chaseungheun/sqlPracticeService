@@ -48,7 +48,7 @@ td {
 			</table>
 		</form:form>
 		<form action="home">
-			<input type="button" value="뒤로가기"
+			<input type="submit" value="뒤로가기"
 				style="text-align: left; width: 150; height: 30;">
 		</form>
 	</div>

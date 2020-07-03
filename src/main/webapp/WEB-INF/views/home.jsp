@@ -71,29 +71,47 @@ th {
 			<h1>문제 게시판</h1>
 		</header>
 		<section id="container">
-				<table>
+			<table>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>문제풀기</th>
+				</tr>
+
+				<c:forEach items="${list}" var="list">
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>문제풀기</th>
+						<td><c:out value="${list.getP_num()}" /></td>
+						<td><c:out value="${list.getP_title()}" /></td>
+						<td><c:out value="차차" /></td>
+						<td><a
+							href='<c:url value='/sample/problem?p_no=${list.getP_num()}'/>'
+							class="text-dark">풀기</a></td>
 					</tr>
+				</c:forEach>
 
-					<c:forEach items="${list}" var="list">
-						<tr>
-							<td><c:out value="${list.getP_num()}"/></td>
-							<td><c:out value="${list.getP_title()}" /></td>
-							<td><c:out value="차차" /></td>
-							<td><a href='<c:url value='/sample/problem?p_no=${list.getP_num()}'/>' class="text-dark">풀기</a></td>
-						</tr>
-					</c:forEach>
-
-				</table>
+			</table>
 		</section>
+
 	</div>
 	<form action="<c:url value="/sample/problemCreate"/>" method="post">
 		<input type="submit" value="문제 만들기">
 	</form>
+	<div>
+		<div id="real-time"
+			style="height: 200px; width: 200px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+			the scroll box.
+		</div>
+		<form action="<c:url value="/sample/chat"/>" method="post">
+				<input type="text" name=chat_body> <input type="submit"
+					value="채팅보내기">
+			</form>
+		
+	</div>
+	<script>
+		document.getElementById("real-time").innerHTML = "바꾸는법";
+	</script>
+
 	ID : ${member.getId()}
 	<br /> PW : ${member.getPw()}
 	<br />
