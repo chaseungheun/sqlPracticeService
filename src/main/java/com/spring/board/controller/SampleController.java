@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.board.ChatDto;
 import com.spring.board.MemberDAO;
 import com.spring.board.MemberDto;
 import com.spring.board.ProblemDAO;
@@ -25,6 +28,8 @@ import com.spring.board.SubmitLogDto;
 @Controller
 @RequestMapping(value = "/sample")
 public class SampleController {
+	String msg;
+	
 	@ModelAttribute("cp")
 	public String getContextPath(HttpServletRequest request) {
 		return request.getContextPath();
@@ -68,21 +73,21 @@ public class SampleController {
 
 	@RequestMapping(value = "/join.do")
 	public String doJoin(@ModelAttribute MemberDto mem, HttpServletResponse reponse) throws Exception {
-		// db¿¡ È¸¿øÁ¤º¸
+		// dbï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		MemberDAO ma = MemberDAO.getInstance();
 		if(ma.insert_user(mem)) {
-			System.out.println("È¸¿ø°¡ÀÔ ¼º°ø");
+			System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		else {
-			System.out.println("È¸¿ø°¡ÀÔ ½ÇÆĞ ID or Phone Áßº¹");
+			System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID or Phone ï¿½ßºï¿½");
 		}
 
 		return "redirect:/sample/";
 	}
-	// È¸¿ø°¡ÀÔ ³Ñ¾î¿À¸é Ã³¸®
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	/*
 	 * @RequestMapping(value = "/join.do") public String doJoin(HttpServletRequest
-	 * request, HttpServletResponse reponse) throws Exception { //db¿¡ È¸¿øÁ¤º¸ MemberDto
+	 * request, HttpServletResponse reponse) throws Exception { //dbï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MemberDto
 	 * md = new MemberDto(); md.setId(request.getParameter("id"));
 	 * md.setPw(request.getParameter("password"));
 	 * md.setName(request.getParameter("name"));
@@ -95,7 +100,7 @@ public class SampleController {
 
 	/*
 	 * @RequestMapping("/join.do") public ModelAndView memberInput() { //
-	 * memberInput.jsp¿¡ commandNameÀÌ 'member'ÀÎ Member °´Ã¼¸¦ ³Ñ°ÜÁÜ return new
+	 * memberInput.jspï¿½ï¿½ commandNameï¿½ï¿½ 'member'ï¿½ï¿½ Member ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ return new
 	 * ModelAndView("home", "MemberDto", new MemberDto()); }
 	 */
 	@RequestMapping(value = "/mypage")
@@ -184,22 +189,22 @@ public class SampleController {
 		session.invalidate();
 		return "redirect:/sample/";
 	}
-	@RequestMapping(value = "/chat")
-	public String doChat(Model model, HttpServletRequest request, HttpServletResponse reponse) throws Exception {
-		HttpSession session = request.getSession();
-
-		MemberDto md = (MemberDto) session.getAttribute("member");
-		if (md == null) {
-			return "redirect:/sample/login";
-		}
-		
-		return "problemResult";
-	}
-	@RequestMapping(value = "/getChat")
-	public void getChat(Model model, HttpServletRequest request, HttpServletResponse reponse) throws Exception {
-		HttpSession session = request.getSession();
-		
 	
+	@ResponseBody
+	@RequestMapping(value = "/chat")
+	public String doChat(ChatDto chat_data, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberDto md = (MemberDto) session.getAttribute("member");
+		msg = chat_data.getContent();
+		msg = "\n"+md.getId()+" = "+msg;
+		System.out.println(msg);
+		return msg;
+	}
+//	/produces = "application/text; charset=utf8" í•œê¸€ê¹¨ì§ ìˆ˜ì •ë²•, json ë³´ë‚¼ë–ˆ application/json;
+	@ResponseBody
+	@RequestMapping(value = "/getChat", produces = "application/text; charset=utf8")
+	public String getChat(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
+		return msg;
 	}
 
 }

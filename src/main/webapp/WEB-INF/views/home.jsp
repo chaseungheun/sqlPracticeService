@@ -1,9 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <title>게시판</title>
 <style>
 div {
@@ -100,16 +105,68 @@ th {
 	<div>
 		<div id="real-time"
 			style="height: 200px; width: 200px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
-			the scroll box.
+			the scroll box. <input>
 		</div>
-		<form action="<c:url value="/sample/chat"/>" method="post">
-				<input type="text" name=chat_body> <input type="submit"
-					value="채팅보내기">
-			</form>
-		
+		<%
+			if (session.getAttribute("member") != null) {
+		%>
+		<input type="text" name=chat_content id="chat_content"> <input
+			type="submit" value="채팅보내기" id="chat_btn">
+		<%}%>
 	</div>
-	<script>
-		document.getElementById("real-time").innerHTML = "바꾸는법";
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		var pre = "";
+		document.getElementById("real-time").innerHTML = "실시간 채팅";
+
+		$('#chat_btn').click(function(e) {
+			var str = document.getElementById("chat_content").value;
+			pre = str;
+			const chat_data = {
+				content : str
+			};
+
+			$.ajax({
+				url : "chat",
+				type : "POST",
+				data : chat_data,
+				success : function(data) {
+					console.log(data);
+					document.getElementById("chat_content").value = "";
+					//append() 줄바꿈하는방법?
+
+				},
+				error : function() {
+					document.getElementById("chat_content").value = str + "에러";
+				}
+			})
+		});
+
+		$(document)
+				.ready(
+						function() {
+							setInterval(
+									function() {
+
+										$
+												.ajax({
+													url : "getChat",
+													type : "POST",
+													success : function(data) {
+														if (pre == "") {
+															pre = data;
+														}
+														if (pre != data) {
+															document
+																	.getElementById("real-time").innerHTML += "<br/>"
+																	+ data;
+																	
+															pre = data;
+														}
+													}
+												})
+									}, 1000);
+						});
 	</script>
 
 	ID : ${member.getId()}
