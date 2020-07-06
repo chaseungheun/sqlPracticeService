@@ -33,8 +33,6 @@
 			</c:forEach>
 	</table>
 	<div>
-		<a href="/board">< </a><a href="/board">1 </a><a href="/board">2 </a><a href="/board">3 </a><a href="/board">4 </a><a href="/">5 </a><a href="/">></a>
-		<br>
 		<form action ="home">
 			<br>
 			<input type="submit" value="HOME" Style="width:200px;height:70px;font-size:30px;color:#000000;font-weight:bold;">

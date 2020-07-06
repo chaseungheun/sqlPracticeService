@@ -15,7 +15,7 @@ public class ProblemDAO {
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	Connection conn = null;
 	PreparedStatement ppst = null;
-	// ½Ì±ÛÅæ
+	// ï¿½Ì±ï¿½ï¿½ï¿½
 	private static ProblemDAO instance = new ProblemDAO();
 
 	private ProblemDAO() {
@@ -25,17 +25,18 @@ public class ProblemDAO {
 		return instance;
 	}
 
-	// µ¥ÀÌÅÍº£ÀÌ½º insert ·ÎÁ÷
-	public void insert(ProblemDto data) {
+	//ë¬¸ì œ ì‚½ì…
+	public void insert_problem(ProblemDto data) {
 
 		try {
-			// JDBC Driver ·Îµù
+			// JDBC Driver ï¿½Îµï¿½
 			Class.forName(driver);
-			// Connection °´Ã¼ »ı¼º / DB ¿¬°á(Á¢¼Ó)
+			// Connection ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ / DB ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
-			// ¼öÇàÇÒ Äõ¸® Á¤ÀÇ / no ÄÃ·³ÀÇ µ¥ÀÌÅÍ´Â ½ÃÄö½º·Î ÀÔ·ÂÇÏ°í, reg_date´Â ¿À¶óÅ¬ÀÇ sysdate·Î ÀÔ·Â
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ / no ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï°ï¿½, reg_dateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½
+			// sysdateï¿½ï¿½ ï¿½Ô·ï¿½
 			ppst = conn.prepareStatement("insert into problem values(SEQ_NUM.NEXTVAL, ?, ?, ?)");
-			// ¸Å°³º¯¼ö·Î Àü´ŞµÈ µ¥ÀÌÅÍ¸¦ Äõ¸®¹®ÀÇ ¹°À½Ç¥¿¡ °ª ¸ÅÇÎ
+			// ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Şµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			ppst.setString(1, data.getP_title());
 			ppst.setString(2, data.getP_body());
 			ppst.setString(3, data.getP_answer());
@@ -54,8 +55,9 @@ public class ProblemDAO {
 			}
 		}
 	}
+	//ë¬¸ì œ ë²ˆí˜¸ë¡œ ë¬¸ì œ ê°€ì ¸ì˜¤ê¸°
 	public ProblemDto select_num(String p_no) {
-		ProblemDto dto = new ProblemDto();				
+		ProblemDto dto = new ProblemDto();
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
@@ -83,21 +85,22 @@ public class ProblemDAO {
 		}
 		return dto;
 	}
+	//select ë¬¸ì œ í’€ì´
 	public String select_answer(String sql) {
-		String ret="";
+		String ret = "";
 		int colnum = 0;
-		ProblemDto dto = new ProblemDto();				
+		ProblemDto dto = new ProblemDto();
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
 			ppst = conn.prepareStatement(sql);
-			
+
 			ResultSet rs = ppst.executeQuery();
-			
+
 			colnum = (rs.getMetaData()).getColumnCount();
 			while (rs.next()) {
-				for(int i=1;i<=colnum;i++) {
-				ret+=rs.getString(i);
+				for (int i = 1; i <= colnum; i++) {
+					ret += rs.getString(i);
 				}
 			}
 
@@ -115,14 +118,17 @@ public class ProblemDAO {
 		}
 		return ret;
 	}
+	//create ë¬¸ì œ í’€ì´
 	public String create_answer(String sql) {
-		String ret="";
+		String ret = "";
 		return ret;
 	}
+	// modify ë¬¸ì œ í’€ì´
 	public String modify_answer(String sql) {
-		String ret="";
+		String ret = "";
 		return ret;
 	}
+	//ë¬¸ì œ ì „ì²´ select
 	public ArrayList<ProblemDto> select_all() {
 		ArrayList<ProblemDto> list = new ArrayList<ProblemDto>();
 		try {
@@ -132,7 +138,7 @@ public class ProblemDAO {
 			ResultSet rs = ppst.executeQuery();
 			while (rs.next()) {
 				ProblemDto dto = new ProblemDto();
-				
+
 				dto.setP_num(Integer.parseInt(rs.getString("prob_num")));
 				dto.setP_title(rs.getString("prob_title"));
 				dto.setP_body(rs.getString("prob_body"));
@@ -153,5 +159,34 @@ public class ProblemDAO {
 			}
 		}
 		return list;
+	}
+	//í…Œì´ë¸” ìƒì„±
+	public void insert_table(String sql) {
+
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
+			if (sql.split(" ")[0].toUpperCase().equals("CREATE")) {
+				String[] sql_split = sql.split(";");
+				for(int i=0;i<sql_split.length;i++) {
+					ppst = conn.prepareStatement(sql_split[i]);
+					ppst.executeUpdate();
+				}
+			} else {
+				System.out.println("create ë¬¸ì´ ì•„ë‹™ë‹ˆë‹¤.");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ppst != null)
+					ppst.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				e2.getStackTrace();
+			}
+		}
 	}
 }

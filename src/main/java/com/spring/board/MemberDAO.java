@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.spring.board.MemberDto;
 
 public class MemberDAO {
-	// ½Ì±ÛÅæ
+	// ï¿½Ì±ï¿½ï¿½ï¿½
 	private static MemberDAO instance = new MemberDAO();
 
 	private MemberDAO() {
@@ -25,31 +25,31 @@ public class MemberDAO {
 	Connection conn = null;
 	PreparedStatement ppst = null;
 
-	// µ¥ÀÌÅÍº£ÀÌ½º insert ·ÎÁ÷
+	// ì‚¬ìš©ì ì¶”ê°€
 	public boolean insert_user(MemberDto data) {
 		try {
-			// JDBC Driver ·Îµù
+			// JDBC Driver ï¿½Îµï¿½
 			Class.forName(driver);
-			// Connection °´Ã¼ »ı¼º / DB ¿¬°á(Á¢¼Ó)
+			// Connection ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ / DB ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
 			if ( !checkPhone(data.getPhone())) {
-				System.out.println("ÀÌ¹Ì ÀÖ´Â Æù");
+				System.out.println("ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½");
 				return false;
 			}
 			if ( !checkId(data.getId())) {
-				System.out.println("ÀÌ¹Ì ÀÖ´Â ID");
+				System.out.println("ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ID");
 				return false;
 			}
-			// ¼öÇàÇÒ Äõ¸® Á¤ÀÇ / no ÄÃ·³ÀÇ µ¥ÀÌÅÍ´Â ½ÃÄö½º·Î ÀÔ·ÂÇÏ°í, reg_date´Â ¿À¶óÅ¬ÀÇ sysdate·Î ÀÔ·Â
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ / no ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï°ï¿½, reg_dateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ sysdateï¿½ï¿½ ï¿½Ô·ï¿½
 			ppst = conn.prepareStatement("insert into member values(?, ?, ?, ?, ?, 0)");
-			// ¸Å°³º¯¼ö·Î Àü´ŞµÈ µ¥ÀÌÅÍ¸¦ Äõ¸®¹®ÀÇ ¹°À½Ç¥¿¡ °ª ¸ÅÇÎ
+			// ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Şµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			ppst.setString(1, data.getName());
 			ppst.setString(2, data.getPw());
 			ppst.setString(3, data.getName());
 			ppst.setString(4, data.getEmail());
 			ppst.setString(5, data.getPhone());
 			ppst.executeUpdate();
-			System.out.println("È¸¿ø°¡ÀÔ ¿Ï·á");
+			System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -64,7 +64,7 @@ public class MemberDAO {
 		}
 		return true;
 	}
-
+	//ë§ì€ ê°œìˆ˜ì— ë”°ë¼ ë­í‚¹ ìˆœì„œëŒ€ë¡œ ì‚¬ìš©ì ì¡°íšŒ
 	public ArrayList<MemberDto> ranking() {
 		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
 		try {
@@ -93,7 +93,7 @@ public class MemberDAO {
 		}
 		return list;
 	}
-
+	//IDë¡œ ì‚¬ìš©ì ì •ë³´ ì¡°íšŒ
 	public MemberDto memberSearch(MemberDto data) {
 		try {
 			Class.forName(driver);
@@ -127,6 +127,7 @@ public class MemberDAO {
 		return null;
 	}
 
+	//phone ì´ ì¤‘ë³µë˜ì—ˆëŠ”ê°€?
 	public boolean checkPhone(String phone) throws SQLException, ClassNotFoundException {
 		Class.forName(driver);
 		conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
@@ -139,7 +140,7 @@ public class MemberDAO {
 		}
 		return true;
 	}
-
+	//IDê°€ ì¤‘ë³µë˜ì—ˆëŠ”ê°€?
 	public boolean checkId(String id) throws SQLException, ClassNotFoundException {
 		Class.forName(driver);
 		conn = DriverManager.getConnection(url, "c##ora_user", "88888888");

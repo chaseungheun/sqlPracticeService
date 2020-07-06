@@ -11,7 +11,7 @@ public class SubmitLogDAO {
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	Connection conn = null;
 	PreparedStatement ppst = null;
-	// ½Ì±ÛÅæ
+	// ï¿½Ì±ï¿½ï¿½ï¿½
 	private static SubmitLogDAO instance = new SubmitLogDAO();
 
 	private SubmitLogDAO() {
@@ -21,17 +21,17 @@ public class SubmitLogDAO {
 		return instance;
 	}
 
-	// µ¥ÀÌÅÍº£ÀÌ½º insert ·ÎÁ÷
+	// ë¬¸ì œ ì œì¶œì‹œ ë¡œê·¸ ìž…ë ¥
 	public void insert(SubmitLogDto data) {
 
 		try {
-			// JDBC Driver ·Îµù
+			// JDBC Driver ï¿½Îµï¿½
 			Class.forName(driver);
-			// Connection °´Ã¼ »ý¼º / DB ¿¬°á(Á¢¼Ó)
+			// Connection ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ / DB ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
-			// ¼öÇàÇÒ Äõ¸® Á¤ÀÇ / no ÄÃ·³ÀÇ µ¥ÀÌÅÍ´Â ½ÃÄö½º·Î ÀÔ·ÂÇÏ°í, reg_date´Â ¿À¶óÅ¬ÀÇ sysdate·Î ÀÔ·Â
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ / no ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï°ï¿½, reg_dateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ sysdateï¿½ï¿½ ï¿½Ô·ï¿½
 			ppst = conn.prepareStatement("insert into submit_log values(SUBMIT_LOG_SEQ.NEXTVAL, ?, ?, ?, ?)");
-			// ¸Å°³º¯¼ö·Î Àü´ÞµÈ µ¥ÀÌÅÍ¸¦ Äõ¸®¹®ÀÇ ¹°À½Ç¥¿¡ °ª ¸ÅÇÎ
+			// ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Þµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			ppst.setString(1, data.getM_ID());
 			ppst.setString(2, data.getProb_num());
 			ppst.setString(3, data.getSub_answer());

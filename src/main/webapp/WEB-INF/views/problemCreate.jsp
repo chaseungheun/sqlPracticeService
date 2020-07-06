@@ -17,7 +17,7 @@
 	</head>
 	<body> 
 		<div>
-			<h1>2번 문제</h1>
+			<h1>문제 작성</h1>
 			<form:form action="${cp}/sample/problemCreate.do" method="post" commandName="problemDto">
 
 	        	문제 제목 : <form:input path = "p_title" size="100" style="height:40;" /><br>

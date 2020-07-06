@@ -44,6 +44,10 @@ th {
 	<sapn class="tab">&#9;</sapn>
 	<sapn class="tab">&#9;</sapn>
 	<table class="nnav">
+		<%
+			if (session.getAttribute("member") == null) {
+		%>
+
 		<tr>
 			<form action="<c:url value="/sample/login"/>" method="post">
 				<input type="submit" value="로그인">
@@ -54,14 +58,14 @@ th {
 				<input type="submit" value="회원가입">
 			</form>
 		</tr>
+		<%
+			} else {
+		%>
+		${member.getId()} 님 반갑습니다!
 		<tr>
+
 			<form action="<c:url value="/sample/mypage"/>" method="post">
 				<input type="submit" value="마이페이지">
-			</form>
-		</tr>
-		<tr>
-			<form action="<c:url value="/sample/rank"/>" method="post">
-				<input type="submit" value="순위보기">
 			</form>
 		</tr>
 		<tr>
@@ -69,6 +73,16 @@ th {
 				<input type="submit" value="로그아웃">
 			</form>
 		</tr>
+		<%
+			}
+		%>
+
+		<tr>
+			<form action="<c:url value="/sample/rank"/>" method="post">
+				<input type="submit" value="순위보기">
+			</form>
+		</tr>
+
 	</table>
 
 	<div id="root">
@@ -101,6 +115,9 @@ th {
 	</div>
 	<form action="<c:url value="/sample/problemCreate"/>" method="post">
 		<input type="submit" value="문제 만들기">
+	</form>
+	<form action="<c:url value="/sample/tableCreate"/>" method="post">
+		<input type="submit" value="테이블 만들기">
 	</form>
 	<div>
 		<div id="real-time"
@@ -160,7 +177,7 @@ th {
 															document
 																	.getElementById("real-time").innerHTML += "<br/>"
 																	+ data;
-																	
+
 															pre = data;
 														}
 													}
@@ -169,8 +186,5 @@ th {
 						});
 	</script>
 
-	ID : ${member.getId()}
-	<br /> PW : ${member.getPw()}
-	<br />
 </body>
 </html>

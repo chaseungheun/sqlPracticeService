@@ -132,11 +132,25 @@ public class SampleController {
 			HttpServletResponse response, Model model) throws Exception {
 		System.out.println(mem.getP_title() + "??");
 		ProblemDAO pa = ProblemDAO.getInstance();
-		pa.insert(mem);
+		pa.insert_problem(mem);
 
 		return "redirect:/sample/";
 	}
+	@RequestMapping(value = "/tableCreate")
+	public String getTableCreate(HttpServletRequest request, HttpServletResponse reponse)
+			throws Exception {
+		return "tableCreate";
+	}
 
+	@RequestMapping(value = "/tableCreate.do")
+	public String doTableCreate(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String str = request.getParameter("table_sql");
+		System.out.println(str + "TableC");
+		ProblemDAO pd = ProblemDAO.getInstance();
+		pd.insert_table(str);
+		return "redirect:/sample/";
+	}
 	@RequestMapping(value = "/problem.do")
 	public String doProblem(Model model, HttpServletRequest request, HttpServletResponse reponse) throws Exception {
 		HttpSession session = request.getSession();
