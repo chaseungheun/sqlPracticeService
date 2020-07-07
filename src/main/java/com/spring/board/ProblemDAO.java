@@ -29,14 +29,9 @@ public class ProblemDAO {
 	public void insert_problem(ProblemDto data) {
 
 		try {
-			// JDBC Driver �ε�
 			Class.forName(driver);
-			// Connection ��ü ���� / DB ����(����)
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
-			// ������ ���� ���� / no �÷��� �����ʹ� �������� �Է��ϰ�, reg_date�� ����Ŭ��
-			// sysdate�� �Է�
 			ppst = conn.prepareStatement("insert into problem values(SEQ_NUM.NEXTVAL, ?, ?, ?)");
-			// �Ű������� ���޵� �����͸� �������� ����ǥ�� �� ����
 			ppst.setString(1, data.getP_title());
 			ppst.setString(2, data.getP_body());
 			ppst.setString(3, data.getP_answer());
@@ -134,15 +129,25 @@ public class ProblemDAO {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
-			ppst = conn.prepareStatement("select * from problem");
+			ppst = conn.prepareStatement("select * from problem order by prob_num");
 			ResultSet rs = ppst.executeQuery();
 			while (rs.next()) {
 				ProblemDto dto = new ProblemDto();
-
 				dto.setP_num(Integer.parseInt(rs.getString("prob_num")));
 				dto.setP_title(rs.getString("prob_title"));
 				dto.setP_body(rs.getString("prob_body"));
 				dto.setP_answer(rs.getString("prob_answer"));
+				//전체 제출 횟수
+				ppst = conn.prepareStatement("select count(*) from submit_log where prob_num ="+dto.getP_num());
+				ResultSet rs1 = ppst.executeQuery();
+				rs1.next();
+				dto.setSub_cnt(rs1.getString(1));
+				//정답 제출 횟수
+				ppst = conn.prepareStatement("select count(*) from submit_log where sub_answer = 'T' and prob_num ="+dto.getP_num());
+				rs1 = ppst.executeQuery();
+				rs1.next();
+				dto.setOk_cnt(rs1.getString(1));
+				
 				list.add(dto);
 			}
 

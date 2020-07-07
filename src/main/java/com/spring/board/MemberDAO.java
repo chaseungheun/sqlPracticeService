@@ -28,9 +28,7 @@ public class MemberDAO {
 	// 사용자 추가
 	public boolean insert_user(MemberDto data) {
 		try {
-			// JDBC Driver �ε�
 			Class.forName(driver);
-			// Connection ��ü ���� / DB ����(����)
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
 			if ( !checkPhone(data.getPhone())) {
 				System.out.println("�̹� �ִ� ��");
@@ -40,9 +38,7 @@ public class MemberDAO {
 				System.out.println("�̹� �ִ� ID");
 				return false;
 			}
-			// ������ ���� ���� / no �÷��� �����ʹ� �������� �Է��ϰ�, reg_date�� ����Ŭ�� sysdate�� �Է�
 			ppst = conn.prepareStatement("insert into member values(?, ?, ?, ?, ?, 0)");
-			// �Ű������� ���޵� �����͸� �������� ����ǥ�� �� ����
 			ppst.setString(1, data.getName());
 			ppst.setString(2, data.getPw());
 			ppst.setString(3, data.getName());
@@ -108,7 +104,11 @@ public class MemberDAO {
 			md.setName(rs.getString("M_NAME"));
 			md.setEmail(rs.getString("M_EMAIL"));
 			md.setPhone(rs.getString("M_PHONE"));
-			System.out.println("log3");
+			//맞은 갯수 추출
+			ppst = conn.prepareStatement("select count(distinct prob_num) from submit_log where sub_answer='T' and M_ID="+md.getId());
+			rs = ppst.executeQuery();
+			rs.next();
+			md.setP_cnt(rs.getString(1));
 			
 			//로그와 맞은 문제 적어주기. 
 			return md;

@@ -6,6 +6,8 @@ public class ProblemDto {
 	private String p_title;
 	private String p_body;
 	private String p_answer;
+	private String ok_cnt;
+	private String sub_cnt;
 	
 	public int getP_num() {
 		return p_num;
@@ -30,5 +32,17 @@ public class ProblemDto {
 	}
 	public void setP_answer(String p_answer) {
 		this.p_answer = p_answer;
+	}
+	public String getSub_cnt() {
+		return sub_cnt;
+	}
+	public void setSub_cnt(String sub_cnt) {
+		this.sub_cnt = sub_cnt;
+	}
+	public String getOk_cnt() {
+		return ok_cnt;
+	}
+	public void setOk_cnt(String ok_cnt) {
+		this.ok_cnt = ok_cnt;
 	}
 }

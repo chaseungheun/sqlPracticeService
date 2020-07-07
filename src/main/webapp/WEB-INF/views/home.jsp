@@ -101,7 +101,7 @@ input[type="submit"] {
 					<tr>
 						<th style="width: 25%" data-sort="int">문제 번호</th>
 						<th style="width: 50%" data-sort="string">제목</th>
-						<th style="width: 7%" data-sort="int">맞은 사람</th>
+						<th style="width: 7%" data-sort="int">정답</th>
 						<th style="width: 15%" data-sort="int">제출</th>
 						<th style="width: 8%" data-sort="float">정답 비율</th>
 					</tr>
@@ -112,32 +112,16 @@ input[type="submit"] {
 							<td><a
 								href='<c:url value='/sample/problem?p_no=${list.getP_num()}'/>'>${list.getP_num()}</a></td>
 							<td><c:out value="${list.getP_title()}" /></td>
-							<td>92625</td>
-							<td>100000</td>
-							<td>${92625/100000}%</td>
+							<td><c:out value="${list.getOk_cnt()}" /></td>
+							<td><c:out value="${list.getSub_cnt()}" /></td>
+							<c:if test="${list.getSub_cnt()==0}">
+							<td>0%</td>
+							</c:if>
+							<c:if test="${list.getSub_cnt()!=0}">
+							<td><c:out value="${ list.getOk_cnt()*100/list.getSub_cnt()}%" /></td>	
+							</c:if>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td><a>1000</a></td>
-						<td>A+B</td>
-						<td>92625</td>
-						<td>292426</td>
-						<td>44.438%</td>
-					</tr>
-					<tr>
-						<td><a>1001</a></td>
-						<td>A-B</td>
-						<td>76090</td>
-						<td>123884</td>
-						<td>72.116%</td>
-					</tr>
-					<tr>
-						<td><a>1002</a></td>
-						<td>터렛</td>
-						<td>11973</td>
-						<td>83438</td>
-						<td>19.870%</td>
-					</tr>
 
 				</tbody>
 			</table>

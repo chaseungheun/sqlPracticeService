@@ -105,7 +105,12 @@ public class SampleController {
 	 * ModelAndView("home", "MemberDto", new MemberDto()); }
 	 */
 	@RequestMapping(value = "/mypage")
-	public String getMypage(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
+	public String getMypage(Model model,HttpServletRequest request, HttpServletResponse reponse) throws Exception {
+		HttpSession session = request.getSession();
+		MemberDto mDto = (MemberDto)session.getAttribute("member");
+		MemberDAO mDAO = MemberDAO.getInstance();
+		mDto = mDAO.memberSearch(mDto);
+		model.addAttribute("member",mDto);
 		return "mypage";
 	}
 
