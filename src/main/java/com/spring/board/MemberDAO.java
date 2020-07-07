@@ -109,6 +109,8 @@ public class MemberDAO {
 			md.setEmail(rs.getString("M_EMAIL"));
 			md.setPhone(rs.getString("M_PHONE"));
 			System.out.println("log3");
+			
+			//로그와 맞은 문제 적어주기. 
 			return md;
 
 		} catch (Exception e) {

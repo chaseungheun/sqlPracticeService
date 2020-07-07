@@ -16,19 +16,31 @@
 
 <link rel="stylesheet"
 	href="https://ddo7jzca0m2vt.cloudfront.net/css/ranklist.css">
-<style>
 
+<style>
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+html {
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding-top: 80px;
+	padding-bottom: 40px;
+	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+	background-repeat: no-repeat;
+	background: linear-gradient(to bottom right, white, white);
+}
 </style>
 </head>
 <body>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="text-center">
-				<p>
 				<H1>
 					<span class="label label-info">랭킹</span>
 				</H1>
-				</p>
 			</div>
 		</div>
 		<div class="margin-bottom-20"></div>
@@ -74,7 +86,8 @@
 			<div class="text-center">
 				<form action="home">
 					<br> <input type="submit" value="HOME"
-						Style="width: 200px; height: 70px; font-size: 30px; color: #000000; font-weight: bold;">
+						class="btn btn-lg btn-primary"
+						Style="width: 200px; height: 70px; font-size: 30px; color: #fff; font-weight: bold; background-color:#007bff;">
 				</form>
 			</div>
 		</div>
@@ -89,6 +102,17 @@
 		src="https://ddo7jzca0m2vt.cloudfront.net/js/table-util.js"></script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/keymaster/1.6.1/keymaster.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -50,6 +50,7 @@ public class SampleController {
 	@RequestMapping(value = "/login")
 	public String getLogin(Model model, HttpServletRequest request, HttpServletResponse reponse) throws Exception {
 		model.addAttribute("memberDto", new MemberDto());
+		System.out.println("로그인하러옴");
 		return "login";
 	}
 

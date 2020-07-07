@@ -8,7 +8,7 @@ public class MemberDto {
 	private String phone;
 	private String sql;
 	private String p_cnt;
-	
+	private String log;
 	public String getP_cnt() {
 		return p_cnt;
 	}
@@ -50,6 +50,12 @@ public class MemberDto {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getLog() {
+		return log;
+	}
+	public void setLog(String log) {
+		this.log = log;
 	}
 
 }

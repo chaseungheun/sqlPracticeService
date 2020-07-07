@@ -75,15 +75,15 @@ body {
 				<form:password path="pw" class="form-control" placeholder="Password" />
 				<BR>
 				<label for="inputPassword" class="sr-only">Password</label>
-				<form:password path="name" class="form-control"
+				<form:input path="name" class="form-control"
 					placeholder="Name" />
 				<BR>
 				<label for="inputPassword" class="sr-only">Password</label>
-				<form:password path="email" class="form-control"
+				<form:input path="email" class="form-control"
 					placeholder="Email" />
 				<BR>
 				<label for="inputPassword" class="sr-only">Password</label>
-				<form:password path="phone" class="form-control"
+				<form:input path="phone" class="form-control"
 					placeholder="Phone" />
 				<br>
 				<input type="submit" value="회원가입 "

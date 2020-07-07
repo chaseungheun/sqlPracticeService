@@ -8,32 +8,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="apple-touch-icon" sizes="180x180"
+	href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0076c0">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://ddo7jzca0m2vt.cloudfront.net/unify/css/style.css?version=20200429">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700|Open+Sans:400,400i,700,700i|Source+Code+Pro&amp;subset=korean"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://ddo7jzca0m2vt.cloudfront.net/css/connect.css?version=20200429">
+<link rel="stylesheet"
+	href="https://ddo7jzca0m2vt.cloudfront.net/css/result.css?version=20200429">
+<link rel="stylesheet"
+	href="https://ddo7jzca0m2vt.cloudfront.net/unify/css/custom.css?version=20200429">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+<link rel="stylesheet"
+	href="https://ddo7jzca0m2vt.cloudfront.net/unify/css/theme-colors/blue.css?version=20200429">
+<link rel="stylesheet"
+	href="https://ddo7jzca0m2vt.cloudfront.net/css/pace.css">
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-10874097-3"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" />
+<meta name="username" content="">
+
 
 <title>게시판</title>
 <style>
-div {
-	text-align: center;
-	line-height: 100px;
-	font-weight: bold;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-th {
-	width: 100px;
-}
-
-.nnav {
-	width: 500px;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.tab {
-	white-space: pre;
-}
-
 input[type="submit"] {
 	/* change these properties to whatever you want */
 	background-color: #f0f8ff;
@@ -43,104 +55,111 @@ input[type="submit"] {
 </style>
 </head>
 <body>
-	<sapn class="tab">&#9;</sapn>
-	<sapn class="tab">&#9;</sapn>
-	<sapn class="tab">&#9;</sapn>
-	<sapn class="tab">&#9;</sapn>
-	<sapn class="tab">&#9;</sapn>
-	<sapn class="tab">&#9;</sapn>
-	<sapn class="tab">&#9;</sapn>
-	<table class="nnav">
-		<%
-			if (session.getAttribute("member") == null) {
-		%>
-
-		<tr>
-			<form action="<c:url value="/sample/login"/>" method="post">
-				<input type="submit" value="로그인">
-			</form>
-		</tr>
-		<tr>
-			<form action="<c:url value="/sample/join"/>" method="post">
-				<input type="submit" value="회원가입">
-			</form>
-		</tr>
-		<%
-			} else {
-		%>
-		${member.getId()} 님 반갑습니다!
-		<tr>
-
-			<form action="<c:url value="/sample/mypage"/>" method="post">
-				<input type="submit" value="마이페이지">
-			</form>
-		</tr>
-		<tr>
-			<form action="<c:url value="/sample/logout.do"/>" method="post">
-				<input type="submit" value="로그아웃">
-			</form>
-		</tr>
-		<tr>
-			<form action="<c:url value="/sample/problemCreate"/>" method="post">
-				<input type="submit" value="문제 만들기">
-			</form>
-		</tr>
-		<tr>
-			<form action="<c:url value="/sample/tableCreate"/>" method="post">
-				<input type="submit" value="테이블 만들기">
-			</form>
-		</tr>
-		<%}%>
-
-		<tr>
-			<form action="<c:url value="/sample/rank"/>" method="post">
-				<input type="submit" value="순위보기">
-			</form>
-		</tr>
-
-	</table>
-
-	<div id="root">
-		<header>
-			<h1>문제 게시판</h1>
-		</header>
-		<section id="container">
-			<table>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>문제풀기</th>
-				</tr>
-
-				<c:forEach items="${list}" var="list">
-					<tr>
-						<td><c:out value="${list.getP_num()}" /></td>
-						<td><c:out value="${list.getP_title()}" /></td>
-						<td><c:out value="차차" /></td>
-						<td><a
-							href='<c:url value='/sample/problem?p_no=${list.getP_num()}'/>'
-							class="text-dark">풀기</a></td>
-					</tr>
-				</c:forEach>
-
-			</table>
-		</section>
-
+	<div class="header no-print">
+		<div class="topbar">
+			<div class="container">
+				<ul class="loginbar pull-right">
+					<%
+						if (session.getAttribute("member") == null) {
+					%>
+					<li><a href="/board/sample/login">로그인</a></li>
+					<li class="topbar-devider"></li>
+					<li><a href="/board/sample/join">회원가입</a></li>
+					<li class="topbar-devider"></li>
+					<%
+						} else {
+					%>
+					<li>${member.getName()} 님 반갑습니다!</li>
+					<li class="topbar-devider"></li>
+					<li><a href="/board/sample/mypage" class="username">마이 페이지</a></li>
+					<li class="topbar-devider"></li>
+					<li><a href="/board/sample/logout.do" class="username">로그아웃</a></li>
+					<li class="topbar-devider"></li>
+					<li><a href="/board/sample/problemCreate" class="username">문제 만들기</a></li>
+					<li class="topbar-devider"></li>
+					<li><a href="/board/sample/tableCreate">테이블 만들기</a></li>
+					<li class="topbar-devider"></li>
+	
+					<%}%>
+					<li><a href="/board/sample/rank">순위보기</a>
+				</ul>
+			</div>
+		</div>
 	</div>
+
+
+	<div class="text-center" style="font-weight:bold;font-size:5rem">
+			문제 게시판
+	</div>
+
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table
+				class="table table-striped table-bordered sortable-table clickable-table"
+				id="problemset">
+				<thead>
+					<tr>
+						<th style="width: 25%" data-sort="int">문제 번호</th>
+						<th style="width: 50%" data-sort="string">제목</th>
+						<th style="width: 7%" data-sort="int">맞은 사람</th>
+						<th style="width: 15%" data-sort="int">제출</th>
+						<th style="width: 8%" data-sort="float">정답 비율</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="list">
+						<tr>
+							<td><a
+								href='<c:url value='/sample/problem?p_no=${list.getP_num()}'/>'>${list.getP_num()}</a></td>
+							<td><c:out value="${list.getP_title()}" /></td>
+							<td>92625</td>
+							<td>100000</td>
+							<td>${92625/100000}%</td>
+						</tr>
+					</c:forEach>
+					<tr>
+						<td><a>1000</a></td>
+						<td>A+B</td>
+						<td>92625</td>
+						<td>292426</td>
+						<td>44.438%</td>
+					</tr>
+					<tr>
+						<td><a>1001</a></td>
+						<td>A-B</td>
+						<td>76090</td>
+						<td>123884</td>
+						<td>72.116%</td>
+					</tr>
+					<tr>
+						<td><a>1002</a></td>
+						<td>터렛</td>
+						<td>11973</td>
+						<td>83438</td>
+						<td>19.870%</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<br />
 
 	<div>
 		<div id="real-time"
-			style="height: 200px; width: 200px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+			style="height: 200px; width: 290px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
 			the scroll box. <input>
 		</div>
 		<%
 			if (session.getAttribute("member") != null) {
 		%>
-		<input type="text" name=chat_content id="chat_content"> <input
-			type="submit" value="채팅보내기" id="chat_btn">
+		<input type="text" name=chat_content id="chat_content"
+			style="width: 200px;"> <input type="submit" value="채팅보내기"
+			id="chat_btn" style="width: 80px">
 		<%}%>
 	</div>
+
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript">
 		var pre = "";
