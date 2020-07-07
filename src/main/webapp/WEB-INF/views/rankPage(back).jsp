@@ -17,7 +17,6 @@
 <link rel="stylesheet"
 	href="https://ddo7jzca0m2vt.cloudfront.net/css/ranklist.css">
 <style>
-
 </style>
 </head>
 <body>
@@ -48,38 +47,55 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%
-							int i = 0;
-						%>
-						<c:forEach items="${list_ranking}" var="list">
-							<tr>
-								<td><%=i + 1%></td>
-								<td>${list.getId()}</td>
-								<td><%=i + 1%>등 이군, 더 열심히 하자</td>
-								<td>${list.getP_cnt()}</td>
-								<td>${list.getP_cnt()*4}</td>
-								<td>${1/4}</td>
-							</tr>
-							<%
-								i = i + 1;
-							%>
+						<tr>
+							<td>1</td>
+							<td><a href="/user/koosaga"><span class='user-legendary'><span
+										class='user-legendary-first-letter'>k</span>oosaga</span></a></td>
+							<td>8000</td>
+							<td><a href="/status?user_id=koosaga&amp;result_id=4">8043</a></td>
+							<td><a href="/status?user_id=koosaga">17501</a></td>
+							<td>53.570%</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td><a href="/user/dotorya"><span class='user-legendary'><span
+										class='user-legendary-first-letter'>d</span>otorya</span></a></td>
+							<td>.</td>
+							<td><a href="/status?user_id=dotorya&amp;result_id=4">6061</a></td>
+							<td><a href="/status?user_id=dotorya">11166</a></td>
+							<td>59.398%</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td><a href="/user/portableangel"><span
+									class='user-orange'>portableangel</span></a></td>
+							<td>배고프다</td>
+							<td><a href="/status?user_id=portableangel&amp;result_id=4">5608</a></td>
+							<td><a href="/status?user_id=portableangel">13634</a></td>
+							<td>47.711%</td>
+						</tr>
 
-						</c:forEach>
 
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<div class="col-md-12">
-			<div class="text-center">
-				<form action="home">
-					<br> <input type="submit" value="HOME"
-						Style="width: 200px; height: 70px; font-size: 30px; color: #000000; font-weight: bold;">
-				</form>
-			</div>
-		</div>
-	</div>
 
+	</div>
+	<table>
+		<tr>
+			<th>순위</th>
+			<th>ID</th>
+			<th>맞은 문제</th>
+		</tr>
+
+	</table>
+	<div>
+		<form action="home">
+			<br> <input type="submit" value="HOME"
+				Style="width: 200px; height: 70px; font-size: 30px; color: #000000; font-weight: bold;">
+		</form>
+	</div>
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script>

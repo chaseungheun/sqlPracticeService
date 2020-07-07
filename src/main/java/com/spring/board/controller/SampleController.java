@@ -76,10 +76,10 @@ public class SampleController {
 		// db�� ȸ������
 		MemberDAO ma = MemberDAO.getInstance();
 		if(ma.insert_user(mem)) {
-			System.out.println("ȸ������ ����");
+			System.out.println("아이디 생성 성공");
 		}
 		else {
-			System.out.println("ȸ������ ���� ID or Phone �ߺ�");
+			System.out.println("ID or Phone 중복");
 		}
 
 		return "redirect:/sample/";
@@ -106,7 +106,6 @@ public class SampleController {
 	@RequestMapping(value = "/mypage")
 	public String getMypage(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
 		return "mypage";
-
 	}
 
 	@RequestMapping(value = "/problem")

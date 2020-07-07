@@ -33,13 +33,6 @@ th {
 .tab {
 	white-space: pre;
 }
-
-input[type="submit"] {
-	/* change these properties to whatever you want */
-	background-color: #f0f8ff;
-	color: #000;
-	border-radius: 5px;
-}
 </style>
 </head>
 <body>
@@ -80,17 +73,9 @@ input[type="submit"] {
 				<input type="submit" value="로그아웃">
 			</form>
 		</tr>
-		<tr>
-			<form action="<c:url value="/sample/problemCreate"/>" method="post">
-				<input type="submit" value="문제 만들기">
-			</form>
-		</tr>
-		<tr>
-			<form action="<c:url value="/sample/tableCreate"/>" method="post">
-				<input type="submit" value="테이블 만들기">
-			</form>
-		</tr>
-		<%}%>
+		<%
+			}
+		%>
 
 		<tr>
 			<form action="<c:url value="/sample/rank"/>" method="post">
@@ -128,7 +113,12 @@ input[type="submit"] {
 		</section>
 
 	</div>
-
+	<form action="<c:url value="/sample/problemCreate"/>" method="post">
+		<input type="submit" value="문제 만들기">
+	</form>
+	<form action="<c:url value="/sample/tableCreate"/>" method="post">
+		<input type="submit" value="테이블 만들기">
+	</form>
 	<div>
 		<div id="real-time"
 			style="height: 200px; width: 200px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
