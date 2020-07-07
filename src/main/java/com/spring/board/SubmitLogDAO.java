@@ -27,16 +27,13 @@ public class SubmitLogDAO {
 		try {
 			// JDBC Driver �ε�
 			Class.forName(driver);
-			// Connection ��ü ���� / DB ����(����)
 			conn = DriverManager.getConnection(url, "c##ora_user", "88888888");
-			// ������ ���� ���� / no �÷��� �����ʹ� �������� �Է��ϰ�, reg_date�� ����Ŭ�� sysdate�� �Է�
-			ppst = conn.prepareStatement("insert into submit_log values(SUBMIT_LOG_SEQ.NEXTVAL, ?, ?, ?, ?)");
-			// �Ű������� ���޵� �����͸� �������� ����ǥ�� �� ����
+			ppst = conn.prepareStatement("insert into submit_log values(SUBMIT_LOG_SEQ.NEXTVAL, ?, ?, ?, ?, TO_CHAR(SYSDATE,'YY/MM/DD HH24:MI:SS'))");
+			
 			ppst.setString(1, data.getM_ID());
 			ppst.setString(2, data.getProb_num());
 			ppst.setString(3, data.getSub_answer());
-			ppst.setString(4, data.getSub_code());
-			
+			ppst.setString(4, data.getSub_code());	
 			ppst.executeUpdate();
 
 		} catch (Exception e) {

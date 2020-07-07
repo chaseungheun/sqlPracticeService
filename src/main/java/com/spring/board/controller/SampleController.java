@@ -173,14 +173,17 @@ public class SampleController {
 			sDto.setM_ID(md.getId());
 			sDto.setProb_num(pnum);
 			sDto.setSub_code(md.getSql());
-			sDto.setSub_answer("F");
 			if (pd.select_answer(md.getSql()).equals(pd.select_answer(pDto.getP_answer()))) {
 				sDto.setSub_answer("T");
+				model.addAttribute("answer","정답입니다.");
+			}
+			else {
+				sDto.setSub_answer("F");
+				model.addAttribute("answer","틀렸습니다.");
 			}
 			SubmitLogDAO sd = SubmitLogDAO.getInstance();
 			sd.insert(sDto);
 		}
-
 		return "problemResult";
 	}
 

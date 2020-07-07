@@ -24,7 +24,7 @@
 			<script type="text/javascript">	
 				setTimeout(function() {document.getElementById("test").value='0';}, 1000);
 				setTimeout(function() {document.getElementById("test").value='50';}, 2000);
-				setTimeout(function() {	document.getElementById("test").value='정답';}, 3000);
+				setTimeout(function() {	document.getElementById("test").value="${answer}";}, 3000);
 			</script>
 		</div>
 	</body>
