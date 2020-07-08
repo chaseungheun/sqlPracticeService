@@ -1,19 +1,28 @@
 package com.spring.board;
 
-public class MemberDto {
+public class MemberDto implements Comparable<MemberDto>{
 	private String id;
 	private String pw;
 	private String name;
 	private String email;
 	private String phone;
 	private String sql;
-	private String p_cnt;
+	private String ok_cnt;
+	private String sub_cnt;
 	private String log;
-	public String getP_cnt() {
-		return p_cnt;
+	private String message;
+	
+	public String getOk_cnt() {
+		return ok_cnt;
 	}
-	public void setP_cnt(String p_cnt) {
-		this.p_cnt = p_cnt;
+	public void setOk_cnt(String ok_cnt) {
+		this.ok_cnt = ok_cnt;
+	}
+	public String getSub_cnt() {
+		return sub_cnt;
+	}
+	public void setSub_cnt(String sub_cnt) {
+		this.sub_cnt = sub_cnt;
 	}
 	public String getSql() {
 		return sql;
@@ -56,6 +65,17 @@ public class MemberDto {
 	}
 	public void setLog(String log) {
 		this.log = log;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	@Override
+	public int compareTo(MemberDto o) {
+		if(Integer.parseInt(this.getOk_cnt()) < Integer.parseInt(o.getOk_cnt())) {return 1;}
+		return -1;
 	}
 
 }

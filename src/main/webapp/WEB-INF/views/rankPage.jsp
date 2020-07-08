@@ -67,10 +67,10 @@ body {
 							<tr>
 								<td><%=i + 1%></td>
 								<td>${list.getId()}</td>
-								<td><%=i + 1%>등 이군, 더 열심히 하자</td>
-								<td>${list.getP_cnt()}</td>
-								<td>${list.getP_cnt()*4}</td>
-								<td>${1/4}</td>
+								<td>${list.getMessage()}</td>
+								<td>${list.getOk_cnt()}</td>
+								<td>${list.getSub_cnt()}</td>
+								<td>${list.getOk_cnt()/list.getSub_cnt()}</td>
 							</tr>
 							<%
 								i = i + 1;

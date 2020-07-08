@@ -2,6 +2,7 @@ package com.spring.board.controller;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,7 +60,9 @@ public class SampleController {
 	public String doLogin(MemberDto member, HttpServletRequest request) throws Exception {
 		MemberDAO md = MemberDAO.getInstance();
 		MemberDto mem = md.memberSearch(member);
-		System.out.println(mem.getPw() + "=" + member.getPw());
+		System.out.println(member.getPw());
+		System.out.println("=" + mem.getPw());
+
 		if (mem.getPw().equals(member.getPw())) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", mem);
@@ -202,6 +206,9 @@ public class SampleController {
 	public String getRank(Model model, HttpServletRequest request, HttpServletResponse reponse) throws Exception {
 		MemberDAO md = MemberDAO.getInstance();
 		ArrayList<MemberDto> list_ranking = md.ranking();
+		//맞은 문제 순으로 정렬하기.
+		Collections.sort(list_ranking);
+		
 		model.addAttribute("list_ranking", list_ranking);
 		return "rankPage";
 	}
@@ -226,6 +233,16 @@ public class SampleController {
 	@ResponseBody
 	@RequestMapping(value = "/getChat", produces = "application/text; charset=utf8")
 	public String getChat(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
+		return msg;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/message")
+	public String changeMessage(@RequestParam(value="message") String str, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberDto md = (MemberDto) session.getAttribute("member");
+		MemberDAO.getInstance().update_message(md, str);
+		System.out.println(str);
 		return msg;
 	}
 

@@ -28,6 +28,7 @@ body {
 	background-repeat: no-repeat;
 	background: linear-gradient(to bottom right, white, white);
 }
+
 table {
 	width: 530px;
 	text-align: center;
@@ -67,16 +68,29 @@ td {
 			</tr>
 			<tr>
 				<td>푼 문제수</td>
-				<td>${member.getP_cnt()}</td>
+				<td>${member.getOk_cnt()}</td>
 			</tr>
 			<tr>
-				<td>2020-06-30-09:34</td>
-				<td>1번 문제 성공</td>
+				<td>상태 메세지</td>
+				<td>
+				<input type="text" value="${member.getMessage()}" id="message"/>
+				<input type="button" value="변경" class="btn btn-lg btn-primary" id="change_btn"/>
+				</td>
 			</tr>
+			
+			<c:forEach var="log_list" items="${member.getLog().split('@@')}">
+				<tr>
+					<td>${log_list.split("::")[2] }</td>
+					<td><a
+						href="javascript:alert('나의 정답 : ${log_list.split('::')[3]}');"
+						onfocus="this.blur()"> ${log_list.split("::")[0] }문제
+							${log_list.split("::")[1]}</a></td>
+				</tr>
+			</c:forEach>
 			<tr>
 				<td colspan="2"><input type="button" value="HOME"
 					onclick="history.back(-1);" class="btn btn-lg btn-primary"
-					Style="width: 200px; height: 60px; font-size: 30px; color: #FFF; font-weight: bold; background-color:#007bff"></td>
+					Style="width: 200px; height: 60px; font-size: 30px; color: #FFF; font-weight: bold; background-color: #007bff"></td>
 			</tr>
 		</table>
 		<%
@@ -88,6 +102,25 @@ td {
 		%>
 		<br>
 	</div>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+
+		$('#change_btn').click(function(e) {
+			var str = document.getElementById("message").value;
+			var mydata = {"message" : str};
+			$.ajax({
+				url : "message",
+				type : "POST",
+				data : mydata,
+				success : function(data) {
+					alert("상태 메세지 변경 성공");
+				},
+				error : function() {
+					alert("상태 메세지 변경 실패");
+				}
+			})
+		});
+	</script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 	<script
