@@ -69,17 +69,18 @@ input[type="submit"] {
 					<%
 						} else {
 					%>
-					<li>${member.getName()} 님 반갑습니다!</li>
+					<li>${member.getName()}님 반갑습니다!</li>
 					<li class="topbar-devider"></li>
 					<li><a href="/board/sample/mypage" class="username">마이 페이지</a></li>
 					<li class="topbar-devider"></li>
 					<li><a href="/board/sample/logout.do" class="username">로그아웃</a></li>
 					<li class="topbar-devider"></li>
-					<li><a href="/board/sample/problemCreate" class="username">문제 만들기</a></li>
+					<li><a href="/board/sample/problemCreate" class="username">문제
+							만들기</a></li>
 					<li class="topbar-devider"></li>
 					<li><a href="/board/sample/tableCreate">테이블 만들기</a></li>
 					<li class="topbar-devider"></li>
-	
+
 					<%}%>
 					<li><a href="/board/sample/rank">순위보기</a>
 				</ul>
@@ -88,9 +89,8 @@ input[type="submit"] {
 	</div>
 
 
-	<div class="text-center" style="font-weight:bold;font-size:5rem">
-			문제 게시판
-	</div>
+	<div class="text-center" style="font-weight: bold; font-size: 5rem">
+		문제 게시판</div>
 
 	<div class="col-md-12">
 		<div class="table-responsive">
@@ -115,10 +115,11 @@ input[type="submit"] {
 							<td><c:out value="${list.getOk_cnt()}" /></td>
 							<td><c:out value="${list.getSub_cnt()}" /></td>
 							<c:if test="${list.getSub_cnt()==0}">
-							<td>0%</td>
+								<td>0%</td>
 							</c:if>
 							<c:if test="${list.getSub_cnt()!=0}">
-							<td><c:out value="${ list.getOk_cnt()*100/list.getSub_cnt()}%" /></td>	
+								<td><c:out
+										value="${ list.getOk_cnt()*100/list.getSub_cnt()}%" /></td>
 							</c:if>
 						</tr>
 					</c:forEach>
@@ -130,11 +131,10 @@ input[type="submit"] {
 
 	<br />
 
-	<div>
+	<div class="col-md-12">
 		<div id="real-time"
 			style="height: 200px; width: 290px; border: 1px solid #ccc; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
-			the scroll box. <input>
-		</div>
+			the scroll box.</div>
 		<%
 			if (session.getAttribute("member") != null) {
 		%>
@@ -149,28 +149,34 @@ input[type="submit"] {
 		var pre = "";
 		document.getElementById("real-time").innerHTML = "실시간 채팅";
 
-		$('#chat_btn').click(function(e) {
-			var str = document.getElementById("chat_content").value;
-			pre = str;
-			const chat_data = {
-				content : str
-			};
+		$('#chat_btn')
+				.click(
+						function(e) {
+							var str = document.getElementById("chat_content").value;
+							const chat_data = {
+								content : str
+							};
+							if (str) {
+								$
+										.ajax({
+											url : "chat",
+											type : "POST",
+											data : chat_data,
+											success : function(data) {
+												console.log(data);
+												document
+														.getElementById("chat_content").value = "";
+												//append() 줄바꿈하는방법?
 
-			$.ajax({
-				url : "chat",
-				type : "POST",
-				data : chat_data,
-				success : function(data) {
-					console.log(data);
-					document.getElementById("chat_content").value = "";
-					//append() 줄바꿈하는방법?
-
-				},
-				error : function() {
-					document.getElementById("chat_content").value = str + "에러";
-				}
-			})
-		});
+											},
+											error : function() {
+												document
+														.getElementById("chat_content").value = str
+														+ "에러";
+											}
+										})
+							}
+						});
 
 		$(document)
 				.ready(
