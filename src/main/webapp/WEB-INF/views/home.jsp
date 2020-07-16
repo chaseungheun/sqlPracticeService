@@ -78,11 +78,17 @@ input[type="submit"] {
 					<li><a href="/board/sample/problemCreate" class="username">문제
 							만들기</a></li>
 					<li class="topbar-devider"></li>
+					<li><a href="/board/sample/jproblemCreate">자바문제 만들기</a></li>
+					<li class="topbar-devider"></li>
 					<li><a href="/board/sample/tableCreate">테이블 만들기</a></li>
 					<li class="topbar-devider"></li>
 
 					<%}%>
 					<li><a href="/board/sample/rank">순위보기</a>
+					<li class="topbar-devider"></li>
+
+					<li><a href="/board/sample/post">공지사항</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -90,7 +96,7 @@ input[type="submit"] {
 
 
 	<div class="text-center" style="font-weight: bold; font-size: 5rem">
-		문제 게시판</div>
+		SQL 문제 게시판</div>
 
 	<div class="col-md-12">
 		<div class="table-responsive">
@@ -120,6 +126,45 @@ input[type="submit"] {
 							<c:if test="${list.getSub_cnt()!=0}">
 								<td><c:out
 										value="${ list.getOk_cnt()*100/list.getSub_cnt()}%" /></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="text-center" style="font-weight: bold; font-size: 5rem">
+		JAVA 문제 게시판</div>
+		
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table
+				class="table table-striped table-bordered sortable-table clickable-table"
+				id="problemset">
+				<thead>
+					<tr>
+						<th style="width: 25%" data-sort="int">문제 번호</th>
+						<th style="width: 50%" data-sort="string">제목</th>
+						<th style="width: 7%" data-sort="int">정답</th>
+						<th style="width: 15%" data-sort="int">제출</th>
+						<th style="width: 8%" data-sort="float">정답 비율</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${jlist}" var="jlist">
+						<tr>
+							<td><a
+								href='<c:url value='/sample/jproblem?p_no=${jlist.getP_num()}'/>'>${jlist.getP_num()}</a></td>
+							<td><c:out value="${jlist.getP_title()}" /></td>
+							<td><c:out value="${jlist.getOk_cnt()}" /></td>
+							<td><c:out value="${jlist.getSub_cnt()}" /></td>
+							<c:if test="${jlist.getSub_cnt()==0}">
+								<td>0%</td>
+							</c:if>
+							<c:if test="${jlist.getSub_cnt()!=0}">
+								<td><c:out
+										value="${ jlist.getOk_cnt()*100/jlist.getSub_cnt()}%" /></td>
 							</c:if>
 						</tr>
 					</c:forEach>

@@ -21,5 +21,6 @@ public class HomeController {
     	return "redirect:/sample/";
 	}
 
-	
+
+
 }
